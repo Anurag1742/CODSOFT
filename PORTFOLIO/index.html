@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anurag Ranjan - MERN Stack Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Add this right after the opening body tag -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">ARK</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Anurag Ranjan</h1>
+            <h2>Frontend Developer | Java DSA Enthusiast</h2>
+            <p>Passionate about building full-stack web applications and UX/UI Designer</p>
+            <div class="contact-info">
+                <a href="mailto:anuragranjan373@gmail.com"><i class="fas fa-envelope"></i> anuragranjan373@gmail.com</a>
+                <a href="tel:+918935920030"><i class="fas fa-phone"></i> +91 8935920030</a>
+            </div>
+            <div class="cta-buttons">
+                <a href="#resume" class="btn primary">View Resume</a>
+                <a href="#projects" class="btn secondary">Explore Projects</a>
+            </div>
+        </div>
+        <div id="particles-js"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about" data-aos="fade-up">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>MERN Stack Developer currently pursuing MCA from Galgotias University, with knowledge of C, C++, Java, and Data Structures & Algorithms. Built full-stack web applications using MongoDB, Express.js, React.js, and Node.js across three academic and personal projects. Looking for an entry-level developer role to apply and further develop skills in a professional setting.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="year">2024-2026</span>
+                        <p>Master of Computer Applications (MCA) at Galgotias University</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">2021-2024</span>
+                        <p>Bachelor of Computer Applications (BCA) at Patliputra University</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">2019-2021</span>
+                        <p>Class XII (I.Sc.) at A.N.S. College, Barh</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="profile.jpg" alt="Anurag Ranjan">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills" data-aos="fade-up">
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <i class="fab fa-java"></i>
+                        <span>Java</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-code"></i>
+                        <span>C/C++</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Web Technologies</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-react"></i>
+                        <span>React.js</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Databases</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <i class="fas fa-database"></i>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-database"></i>
+                        <span>MySQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Frameworks</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <i class="fab fa-git-alt"></i>
+                        <span>Git</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Adobe Photoshop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects" data-aos="fade-up">
+        <h2 class="section-title">Projects Showcase</h2>
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ai">AI & ML</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="java">Java</button>
+        </div>
+        <div class="projects-grid">
+            <!-- Project cards will be dynamically added here -->
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education" data-aos="fade-up">
+        <h2 class="section-title">Education</h2>
+        <div class="education-timeline">
+            <div class="education-item" data-aos="fade-up">
+                <div class="education-content">
+                    <h3>Master of Computer Applications (MCA)</h3>
+                    <p class="institution">Galgotias University, Greater Noida, UP</p>
+                    <p class="duration">2024-2026</p>
+                    <p class="grade">CGPA: 8.00</p>
+                </div>
+            </div>
+            <div class="education-item" data-aos="fade-up">
+                <div class="education-content">
+                    <h3>Bachelor of Computer Applications (BCA)</h3>
+                    <p class="institution">Patliputra University, Greater Noida, UP</p>
+                    <p class="duration">2021-2024</p>
+                    <p class="grade">Percentage: 65.8%</p>
+                </div>
+            </div>
+            <div class="education-item" data-aos="fade-up">
+                <div class="education-content">
+                    <h3>Class XII (I.Sc.)</h3>
+                    <p class="institution">A.N.S. College, Barh | BSEB, Patna</p>
+                    <p class="duration">2019-2021</p>
+                    <p class="grade">Percentage: 66%</p>
+                </div>
+            </div>
+            <div class="education-item" data-aos="fade-up">
+                <div class="education-content">
+                    <h3>Class X</h3>
+                    <p class="institution"> High School Karjan Suryapura, Athmalgola | BSEB, Patna</p>
+                    <p class="duration">2018-2019</p>
+                    <p class="grade">Percentage: 62%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications" data-aos="fade-up">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certifications-grid">
+            <!-- <div class="certification-card" data-aos="fade-up">
+                <i class="fas fa-certificate"></i>
+                <h3>Advanced Diploma in Computer Applications (ADCA)</h3>
+                <p>DCTP, Bihar | Sep 2021</p>
+            </div> -->
+            <div class="certification-card" data-aos="fade-up">
+                <i class="fas fa-database"></i>
+                <h3>SQL Advanced Certification</h3>
+                <p>Hackerrank | July 2025</p>
+            </div>
+            <div class="certification-card" data-aos="fade-up">
+                <i class="fas fa-gear"></i>
+                <h3>Software Development Job Simulation</h3>
+                <p>Mastercard | march 2025</p>
+            </div>
+            <div class="certification-card" data-aos="fade-up">
+                <i class="fas fa-network-wired"></i>
+                <h3>CCNA: Introduction to Networks</h3>
+                <p>CISCO | May 2025</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" data-aos="fade-up">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Email</label>
+
+                </div>
+                <div class="form-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <button type="submit" class="btn primary">Send Message</button>
+            </form>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/anurag-ranjan-68034b330/" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/Anurag1742" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:anuragranjan373@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Anurag Ranjan. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
