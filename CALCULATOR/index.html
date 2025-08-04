@@ -3,54 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Calculator</title>
+    <title>Smart Calculator</title>
     <!-- Link to Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Link to your custom stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
 </head>
-<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div id="particles-js"></div>
 
-    <div class="calculator-container bg-gray-800 shadow-2xl rounded-2xl p-6 w-full max-w-sm mx-auto">
-        <!-- Display Screen -->
-        <div id="display" class="display">0</div>
+<div class="main-wrapper flex flex-wrap items-start justify-center gap-8 w-full max-w-[1400px]">
+        <!-- Calculator -->
+        <!-- The "max-w-xs" class has been removed from this div -->
+        <div class="calculator-container bg-white shadow-2xl rounded-2xl p-6 w-full relative">
+            <!-- History Toggle Button -->
+            <button id="history-toggle-btn" class="history-toggle-btn">History</button>
+            
+            <h1 class="text-2xl font-bold text-gray-700 mb-4">Smart Calculator</h1>
+            <!-- Display Screen -->
+            <div id="display" class="display">0</div>
 
-        <!-- Calculator Buttons Grid -->
-        <div class="calculator-grid">
-            <!-- Row 1 -->
-            <button class="btn btn-func">AC</button>
-            <button class="btn btn-func">DEL</button>
-            <button class="btn btn-op">%</button>
-            <button class="btn btn-op">÷</button>
+            <!-- Calculator Buttons Grid -->
+            <div class="calculator-grid">
+                <button class="btn btn-num">7</button>
+                <button class="btn btn-num">8</button>
+                <button class="btn btn-num">9</button>
+                <button class="btn btn-op">÷</button>
 
-            <!-- Row 2 -->
-            <button class="btn btn-num">7</button>
-            <button class="btn btn-num">8</button>
-            <button class="btn btn-num">9</button>
-            <button class="btn btn-op">×</button>
+                <button class="btn btn-num">4</button>
+                <button class="btn btn-num">5</button>
+                <button class="btn btn-num">6</button>
+                <button class="btn btn-op">×</button>
 
-            <!-- Row 3 -->
-            <button class="btn btn-num">4</button>
-            <button class="btn btn-num">5</button>
-            <button class="btn btn-num">6</button>
-            <button class="btn btn-op">−</button>
+                <button class="btn btn-num">1</button>
+                <button class="btn btn-num">2</button>
+                <button class="btn btn-num">3</button>
+                <button class="btn btn-op">−</button>
 
-            <!-- Row 4 -->
-            <button class="btn btn-num">1</button>
-            <button class="btn btn-num">2</button>
-            <button class="btn btn-num">3</button>
-            <button class="btn btn-op">+</button>
+                <button class="btn btn-num">0</button>
+                <button class="btn btn-num">.</button>
+                <button class="btn btn-op">=</button>
+                <button class="btn btn-op">+</button>
 
-            <!-- Row 5 -->
-            <button class="btn btn-num btn-span-2">0</button>
-            <button class="btn btn-num">.</button>
-            <button class="btn btn-op">=</button>
+                <button class="btn btn-func">C</button>
+                <button class="btn btn-func">←</button>
+                <button class="btn btn-func btn-span-2">Save</button>
+            </div>
+        </div>
+
+            <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    out_mode: "out"
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 0.5 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+
+        <!-- History Panel -->
+        <div id="history-panel" class="history-container bg-white shadow-2xl rounded-2xl p-6 w-full max-w-xs hidden">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                History
+            </h2>
+            <div id="history-list" class="history-list space-y-3">
+                <!-- History items will be injected here by JavaScript -->
+            </div>
         </div>
     </div>
 
     <!-- Link to your JavaScript file -->
     <script src="script.js"></script>
+
 </body>
 </html>
