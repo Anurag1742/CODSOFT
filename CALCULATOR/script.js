@@ -1,11 +1,14 @@
 // --- DOM Element Selection ---
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn');
+const historyList = document.getElementById('history-list');
+const historyToggleBtn = document.getElementById('history-toggle-btn');
+const historyPanel = document.getElementById('history-panel');
 
 // --- State Variables ---
 let currentInput = '0';
-let operatorPressed = false;
-let calculationDone = false; // Flag to check if the last action was '='
+let calculationDone = false;
+let history = []; // Array to store calculation history
 
 // --- Core Functions ---
 
@@ -14,41 +17,18 @@ let calculationDone = false; // Flag to check if the last action was '='
  * @param {string} value The character or number to append.
  */
 function appendToDisplay(value) {
-    // If the last action was calculation, start a new calculation
     if (calculationDone) {
-        currentInput = '0';
-        calculationDone = false;
-    }
-    
-    // If current input is '0' or an error, replace it
-    if (currentInput === '0' || currentInput === 'Error') {
-        // Allow starting with a decimal point
-        if (value === '.') {
-            currentInput = '0';
+        const isOperator = ['+', '−', '×', '÷'].includes(value);
+        if (isOperator) {
+            calculationDone = false;
         } else {
-            currentInput = '';
+            currentInput = '0';
+            calculationDone = false;
         }
     }
-
-    const isOperator = ['+', '-', '×', '÷', '%'].includes(value);
     
-    // Logic to handle operators
-    if (isOperator) {
-        if (operatorPressed) {
-            // Replace the last operator if a new one is pressed
-            currentInput = currentInput.slice(0, -1);
-        }
-        operatorPressed = true;
-    } else {
-        operatorPressed = false;
-    }
-    
-    // Logic to handle decimal points
-    if (value === '.') {
-        // Split input by operators to check the last number segment
-        const parts = currentInput.replace(/[+\-×÷%]/g, ' ').split(' ');
-        const lastPart = parts[parts.length - 1];
-        if (lastPart.includes('.')) return; // Prevent multiple decimals in one number
+    if (currentInput === '0' && value !== '.') {
+        currentInput = '';
     }
 
     currentInput += value;
@@ -67,7 +47,6 @@ function updateDisplay() {
  */
 function clearDisplay() {
     currentInput = '0';
-    operatorPressed = false;
     calculationDone = false;
     updateDisplay();
 }
@@ -76,107 +55,141 @@ function clearDisplay() {
  * Deletes the last character from the input.
  */
 function deleteLast() {
-    if (currentInput === 'Error' || calculationDone) {
+    if (calculationDone) {
         clearDisplay();
         return;
     }
-    
-    if (currentInput.length === 1) {
+    currentInput = currentInput.slice(0, -1);
+    if (currentInput === '') {
         currentInput = '0';
-    } else {
-        currentInput = currentInput.slice(0, -1);
     }
-    
-    const lastChar = currentInput.slice(-1);
-    operatorPressed = ['+', '-', '×', '÷', '%'].includes(lastChar);
     updateDisplay();
 }
 
 /**
- * Evaluates the expression in the input string and displays the result.
+ * Evaluates the expression, updates history, and displays the result.
  */
 function calculateResult() {
-    if (operatorPressed) return; // Don't calculate if the expression ends with an operator
+    if (calculationDone || !currentInput || currentInput === 'Error') return;
 
     try {
-        // Replace display operators with JS-friendly ones
-        let expression = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
+        const expression = currentInput;
+        let evalExpression = expression.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
         
-        // A more robust way to handle percentages
-        expression = expression.replace(/(\d+(\.\d+)?)%/g, (match, p1) => `(${p1}/100)`);
+        if (/[*\/+-]$/.test(evalExpression)) {
+            throw new Error("Invalid expression");
+        }
         
-        // Security Note: Using Function constructor is safer than eval() but still carries risks
-        // in a real-world, public-facing application. For this project, it's acceptable.
-        const result = new Function('return ' + expression)();
+        const result = new Function('return ' + evalExpression)();
 
         if (isNaN(result) || !isFinite(result)) {
             throw new Error("Invalid calculation");
         }
         
-        // Round to a reasonable number of decimal places to avoid floating point issues
-        currentInput = String(Math.round(result * 1e10) / 1e10);
+        const roundedResult = Math.round(result * 1e10) / 1e10;
+        
+        addToHistory(expression, roundedResult);
+        
+        currentInput = String(roundedResult);
         calculationDone = true;
 
     } catch (error) {
-        console.error("Calculation Error:", error);
         currentInput = 'Error';
+        calculationDone = true;
     }
     
-    operatorPressed = false;
     updateDisplay();
 }
 
+/**
+ * Adds a calculation to the history array and updates the display.
+ * @param {string} expression The calculation expression.
+ * @param {number} result The result of the calculation.
+ */
+function addToHistory(expression, result) {
+    history.unshift({ expression, result });
+    if (history.length > 20) {
+        history.pop();
+    }
+    updateHistoryDisplay();
+}
+
+/**
+ * Renders the history array into the history panel.
+ */
+function updateHistoryDisplay() {
+    historyList.innerHTML = '';
+    if (history.length === 0) {
+        historyList.innerHTML = '<p class="text-center text-gray-400 text-sm mt-4">No history yet.</p>';
+        return;
+    }
+    history.forEach((item, index) => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        historyItem.innerHTML = `
+            <span class="expression">${item.expression} = ${item.result}</span>
+            <button class="remove-btn" data-index="${index}">Remove</button>
+        `;
+        historyList.appendChild(historyItem);
+    });
+}
+
+/**
+ * Removes an item from the history.
+ * @param {number} index The index of the item to remove.
+ */
+function removeFromHistory(index) {
+    history.splice(index, 1);
+    updateHistoryDisplay();
+}
+
+/**
+ * Loads history from browser's localStorage.
+ */
+function loadHistory() {
+    const savedHistory = localStorage.getItem('calculatorHistory');
+    if (savedHistory) {
+        history = JSON.parse(savedHistory);
+    }
+    updateHistoryDisplay();
+}
 
 // --- Event Handling ---
 
-// Add event listeners to all buttons
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const value = button.textContent;
 
-        if (button.classList.contains('btn-num') || value === '.') {
+        if (!isNaN(value) || value === '.') {
             appendToDisplay(value);
-        } else if (button.classList.contains('btn-op')) {
-            if (value === '=') {
-                calculateResult();
-            } else {
-                appendToDisplay(value);
-            }
-        } else if (button.classList.contains('btn-func')) {
-            if (value === 'AC') {
-                clearDisplay();
-            } else if (value === 'DEL') {
-                deleteLast();
-            }
+        } else if (['÷', '×', '−', '+'].includes(value)) {
+            appendToDisplay(value);
+        } else if (value === '=') {
+            calculateResult();
+        } else if (value === 'C') {
+            clearDisplay();
+        } else if (value === '←') {
+            deleteLast();
+        } else if (value === 'Save') {
+            localStorage.setItem('calculatorHistory', JSON.stringify(history));
+            alert('History saved!');
         }
     });
 });
 
-
-// Add keyboard support for a better user experience
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    
-    if (key >= '0' && key <= '9') {
-        appendToDisplay(key);
-    } else if (key === '.') {
-        appendToDisplay('.');
-    } else if (key === '+') {
-        appendToDisplay('+');
-    } else if (key === '-') {
-        appendToDisplay('-');
-    } else if (key === '*') {
-        appendToDisplay('×');
-    } else if (key === '/') {
-        appendToDisplay('÷');
-    } else if (key === '%') {
-        appendToDisplay('%');
-    } else if (key === 'Enter' || key === '=') {
-        event.preventDefault(); // Prevent default browser action
-        calculateResult();
-    } else if (key === 'Backspace') {
-        deleteLast();
-    } else if (key === 'Escape' || key.toLowerCase() === 'c') {
-        clearDisplay();
+historyList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remove-btn')) {
+        const index = event.target.dataset.index;
+        removeFromHistory(index);
     }
 });
+
+// Add event listener for the new history toggle button
+if (historyToggleBtn && historyPanel) {
+    historyToggleBtn.addEventListener('click', () => {
+        historyPanel.classList.toggle('hidden');
+    });
+}
+
+// Load history from localStorage when the page loads.
+loadHistory();
