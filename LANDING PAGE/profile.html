@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - AI.Landing Page</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  <header id="main-header" class="scrolled">
+    <nav class="container">
+      <a href="index.html" class="logo">AI.Landing Page</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a id="logout-btn" href="#" class="btn btn-secondary btn-logout">Logout</a></li>
+      </ul>
+
+      <button class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="container profile-page">
+    <section class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar" aria-hidden="true">
+          <span id="profile-avatar-initials">U</span>
+        </div>
+        <div class="profile-header-text">
+          <h1>Profile</h1>
+          <p class="profile-subtitle" id="profile-status">Loading your details…</p>
+        </div>
+      </div>
+
+      <div class="profile-grid" aria-live="polite">
+        <div class="profile-row">
+          <span class="profile-label">Username</span>
+          <span class="profile-value" id="profile-username">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Email</span>
+          <span class="profile-value" id="profile-email">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">User ID</span>
+          <span class="profile-value profile-mono" id="profile-id">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Created</span>
+          <span class="profile-value" id="profile-created">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Updated</span>
+          <span class="profile-value" id="profile-updated">—</span>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <a class="btn btn-primary" href="index.html">Back to Home</a>
+        <a class="btn btn-secondary btn-logout" id="logout-btn-2" href="#">Logout</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 AI.Proto. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

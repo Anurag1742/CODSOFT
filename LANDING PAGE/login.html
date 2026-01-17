@@ -25,15 +25,15 @@
 
     <div class="form-box login">
       <h2>Login</h2>
-      <form action="#">
+      <form id="login-form" action="#">
         <div class="input-box">
           <span class="icon"><ion-icon name="mail"></ion-icon></span>
-          <input type="text" required />
+          <input id="login-email" type="text" autocomplete="email" required />
           <label>Email</label>
         </div>
         <div class="input-box">
           <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-          <input type="password" required />
+          <input id="login-password" type="password" autocomplete="current-password" required />
           <label>Password</label>
         </div>
         <div class="remember-forgot">
@@ -49,20 +49,20 @@
 
     <div class="form-box register">
       <h2>Registration</h2>
-      <form action="#">
+      <form id="register-form" action="#">
         <div class="input-box">
           <span class="icon"><ion-icon name="person"></ion-icon></span>
-          <input type="text" required />
+          <input id="register-username" type="text" autocomplete="username" required />
           <label>Username</label>
         </div>
         <div class="input-box">
           <span class="icon"><ion-icon name="mail"></ion-icon></span>
-          <input type="text" required />
+          <input id="register-email" type="text" autocomplete="email" required />
           <label>Email</label>
         </div>
         <div class="input-box">
           <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-          <input type="password" required />
+          <input id="register-password" type="password" autocomplete="new-password" required />
           <label>Password</label>
         </div>
         <div class="remember-forgot">
@@ -75,6 +75,10 @@
       </form>
     </div>
   </div>
+
+  <footer class="page-footer">
+    <p>&copy; 2026 AI.Proto. All Rights Reserved.</p>
+  </footer>
 
   <script src="script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
