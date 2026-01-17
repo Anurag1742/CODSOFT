@@ -9,6 +9,7 @@
 
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -16,6 +17,7 @@ body{
     background-size: cover;
     background-position: center;
     zoom: 110%;
+    padding-bottom: 56px;
 }
 
 header {
@@ -235,4 +237,19 @@ header {
 }
 .login-register p a:hover{
     text-decoration: underline;
+}
+
+.page-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.95rem;
+    z-index: 999;
 }
