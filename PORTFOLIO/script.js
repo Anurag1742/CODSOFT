@@ -39,6 +39,39 @@ if (savedTheme) {
         : '<i class="fas fa-moon"></i>';
 }
 
+// Resume Download
+async function downloadResume(fileUrl = 'Resume.pdf', downloadName = 'resume.pdf') {
+    try {
+        const res = await fetch(fileUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+
+        const blob = await res.blob();
+        const objectUrl = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = objectUrl;
+        a.download = downloadName;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        URL.revokeObjectURL(objectUrl);
+    } catch (err) {
+        // Fallback: open the PDF (or show an error if missing)
+        console.warn('Resume download failed:', err);
+        window.open(fileUrl, '_blank', 'noopener,noreferrer');
+        alert('Resume file not found. Please make sure Resume.pdf is in the project folder.');
+    }
+}
+
+const resumeBtn = document.getElementById('resume-download');
+if (resumeBtn) {
+    resumeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        downloadResume(resumeBtn.getAttribute('href') || 'Resume.pdf', resumeBtn.getAttribute('download') || 'resume.pdf');
+    });
+}
+
 // Mobile Navigation
 const navbar = document.querySelector('.navbar');
 const hamburger = document.querySelector('.hamburger');
