@@ -170,24 +170,24 @@ const projects = [
         description: 'Created a voice-controlled desktop assistant in Python, enabling 10+ voice commands to automate tasks like opening applications, sending emails, and conducting online searches. Achieved 95% command recognition accuracy, reducing user input errors by 30%.',
         image: 'Project1.png',
         tags: ['AI & ML'],
-        demo: 'https://github.com/Anurag1742/Jarvis-AI-Assistant',
-        github: 'https://github.com/Anurag1742/Jarvis-AI-Assistant'
+        demo: 'https://github.com/Anurag1742/AI-Desktop-Partner-Jarvis-',
+        github: 'https://github.com/Anurag1742'
     },
     {
         title: 'Parallax Website',
         description: 'Developed a visually engaging scroll-based interactive website using layered parallax effects, enhancing user engagement by 20%. Optimized animations and layout to reduce page load time by 25%, improving overall user experience and SEO ranking.',
         image: 'Project2.png',
         tags: ['web'],
-        demo: '#',
-        github: '#'
+        demo: 'https://github.com/Anurag1742/Parallax-Website-Nature-',
+        github: 'https://github.com/Anurag1742'
     },
     {
         title: 'Employee Management System',
         description: 'Built a desktop application to manage employee records with CRUD operations, handling over 1,000 records efficiently. Integrated MySQL via JDBC with input validation and optimized SQL queries, improving data retrieval speed by 35%.',
         image: 'Project3.png',
         tags: ['java'],
-        demo: '#',
-        github: '#'
+        demo: 'https://github.com/Anurag1742/Employee-Management-System',
+        github: 'https://github.com/Anurag1742'
     }
 ];
 
