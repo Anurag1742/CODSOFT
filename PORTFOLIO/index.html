@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anurag Ranjan - MERN Stack Developer</title>
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#00ff00">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Add this right after the opening body tag -->
+    <div class="scroll-progress" aria-hidden="true">
+        <span class="scroll-progress__bar"></span>
+    </div>
+
     <div class="loading">
         <div class="loading-spinner"></div>
     </div>
@@ -17,7 +27,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">ARK</div>
-        <div class="nav-links">
+        <div class="nav-links" id="site-nav">
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
@@ -25,14 +35,14 @@
             <a href="#education">Education</a>
             <a href="#contact">Contact</a>
         </div>
-        <div class="theme-toggle">
-            <i class="fas fa-moon"></i>
-        </div>
-        <div class="hamburger">
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <i class="fas fa-sun"></i>
+        </button>
+        <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
     </nav>
 
     <!-- Hero Section -->
@@ -182,7 +192,7 @@
                     <h3>Master of Computer Applications (MCA)</h3>
                     <p class="institution">Galgotias University, Greater Noida, UP</p>
                     <p class="duration">2024-2026</p>
-                    <p class="grade">CGPA: 8.00</p>
+                    <p class="grade">CGPA: 7.5</p>
                 </div>
             </div>
             <div class="education-item" data-aos="fade-up">
@@ -285,6 +295,10 @@
             </div>
         </div>
     </footer>
+
+    <button class="back-to-top" type="button" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

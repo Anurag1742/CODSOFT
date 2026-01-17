@@ -6,9 +6,11 @@ window.addEventListener('load', () => {
     }, 500);
 });
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // Enhanced AOS Initialization
 AOS.init({
-    duration: 1000,
+    duration: prefersReducedMotion ? 0 : 1000,
     once: true,
     offset: 100,
     easing: 'ease-in-out',
@@ -38,15 +40,42 @@ if (savedTheme) {
 }
 
 // Mobile Navigation
+const navbar = document.querySelector('.navbar');
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
 hamburger.addEventListener('click', () => {
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    navbar.classList.toggle('nav-open');
     hamburger.classList.toggle('active');
+    const isOpen = navbar.classList.contains('nav-open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+});
+
+// Close menu when clicking outside (mobile)
+document.addEventListener('click', (e) => {
+    if (window.innerWidth > 768) return;
+    if (!navbar.classList.contains('nav-open')) return;
+    if (navbar.contains(e.target)) return;
+
+    navbar.classList.remove('nav-open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+});
+
+// Close menu on resize to desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navbar.classList.remove('nav-open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
+    }
 });
 
 // Particles.js Configuration
+if (!prefersReducedMotion) {
 particlesJS('particles-js', {
     particles: {
         number: {
@@ -114,21 +143,40 @@ particlesJS('particles-js', {
     },
     retina_detect: true
 });
+}
 
 // Project Data
+const PLACEHOLDER_IMG = (() => {
+    const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+            <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#111827"/>
+                    <stop offset="1" stop-color="#1f2937"/>
+                </linearGradient>
+            </defs>
+            <rect width="1200" height="675" fill="url(#g)"/>
+            <circle cx="240" cy="170" r="160" fill="#00ff00" opacity="0.18"/>
+            <circle cx="980" cy="520" r="210" fill="#3b82f6" opacity="0.20"/>
+            <text x="60" y="620" fill="#e5e7eb" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700" opacity="0.95">Project Preview</text>
+        </svg>
+    `.trim();
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+})();
+
 const projects = [
     {
         title: 'AI Desktop Partner (Jarvis)',
         description: 'Created a voice-controlled desktop assistant in Python, enabling 10+ voice commands to automate tasks like opening applications, sending emails, and conducting online searches. Achieved 95% command recognition accuracy, reducing user input errors by 30%.',
-        image: 'project1.jpg',
-        tags: ['ai'],
+        image: 'Project1.png',
+        tags: ['AI & ML'],
         demo: 'https://github.com/Anurag1742/Jarvis-AI-Assistant',
         github: 'https://github.com/Anurag1742/Jarvis-AI-Assistant'
     },
     {
         title: 'Parallax Website',
         description: 'Developed a visually engaging scroll-based interactive website using layered parallax effects, enhancing user engagement by 20%. Optimized animations and layout to reduce page load time by 25%, improving overall user experience and SEO ranking.',
-        image: 'project2.jpg',
+        image: 'Project2.png',
         tags: ['web'],
         demo: '#',
         github: '#'
@@ -136,7 +184,7 @@ const projects = [
     {
         title: 'Employee Management System',
         description: 'Built a desktop application to manage employee records with CRUD operations, handling over 1,000 records efficiently. Integrated MySQL via JDBC with input validation and optimized SQL queries, improving data retrieval speed by 35%.',
-        image: 'project3.jpg',
+        image: 'Project3.png',
         tags: ['java'],
         demo: '#',
         github: '#'
@@ -159,7 +207,7 @@ function renderProjects(filter = 'all') {
         projectCard.setAttribute('data-aos', 'fade-up');
         
         projectCard.innerHTML = `
-            <img src="${project.image}" alt="${project.title}">
+            <img src="${project.image || PLACEHOLDER_IMG}" alt="${project.title}" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';">
             <h3>${project.title}</h3>
             <p>${project.description}</p>
             <div class="project-tags">
@@ -173,6 +221,12 @@ function renderProjects(filter = 'all') {
         
         projectsGrid.appendChild(projectCard);
     });
+
+    // Ensure AOS picks up dynamically injected elements
+    if (window.AOS) {
+        if (typeof AOS.refreshHard === 'function') AOS.refreshHard();
+        else if (typeof AOS.refresh === 'function') AOS.refresh();
+    }
 }
 
 // Initialize projects
@@ -220,21 +274,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
             // Close mobile menu if open
             if (window.innerWidth <= 768) {
-                navLinks.style.display = 'none';
+                navbar.classList.remove('nav-open');
                 hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'Open menu');
             }
         }
     });
 });
 
-// Add scroll event listener for navbar
+// Scroll UI: navbar, progress bar, back-to-top
+const progressBar = document.querySelector('.scroll-progress__bar');
+const backToTop = document.querySelector('.back-to-top');
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+});
+
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'var(--bg-color)';
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.background = 'transparent';
-        navbar.style.boxShadow = 'none';
-    }
+    const y = window.scrollY;
+    navbar.classList.toggle('scrolled', y > 30);
+
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    const progress = scrollable > 0 ? y / scrollable : 0;
+    if (progressBar) progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+
+    if (backToTop) backToTop.classList.toggle('visible', y > 500);
 }); 
+
+// Initialize scroll-driven UI state on first paint
+window.dispatchEvent(new Event('scroll'));
