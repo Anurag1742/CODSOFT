@@ -169,7 +169,7 @@ const projects = [
         title: 'AI Desktop Partner (Jarvis)',
         description: 'Created a voice-controlled desktop assistant in Python, enabling 10+ voice commands to automate tasks like opening applications, sending emails, and conducting online searches. Achieved 95% command recognition accuracy, reducing user input errors by 30%.',
         image: 'Project1.png',
-        tags: ['AI & ML'],
+        tags: ['ai'],
         demo: 'https://github.com/Anurag1742/AI-Desktop-Partner-Jarvis-',
         github: 'https://github.com/Anurag1742'
     },
